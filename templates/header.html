@@ -1,8 +1,10 @@
-<nav class="container">
-  <a href="{{site_url}}" id="home">Home</a>
+<header>
+  <nav class="container">
+    <a href="{{site_url}}" id="home">Home</a>
 
-  {% for nav in navbar %}
-  <a href="{{nav['url']}}">{{nav['text']}}</a>
-  {% endfor %}
+    {% for nav in navbar %}
+    <a href="{{nav['url']}}">{{nav['text']}}</a>
+    {% endfor %}
 
-</nav>
+  </nav>
+</header>

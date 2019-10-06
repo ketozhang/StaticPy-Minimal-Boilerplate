@@ -2,5 +2,11 @@
 {% block content %}
 {% include 'header.html' %}
 <main class="container">
+  <h3>Blogposts:</h3>
+  <ul>
+  {% for post_url, post in get_subpages(request.path).items() %}
+    <li><a href="{{post_url}}">{{post['title']}}</a></li>
+    {% endfor %}
+  </ul>
 </main>
 {% endblock %}

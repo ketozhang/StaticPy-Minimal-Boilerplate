@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-<main>
+{% include 'header.html' %}
+<main class="container">
+  <h1 class="title">{{page['title']}}</h1>
+  <div class="sidenav">
+    <a href="javascript:window.location.href=document.referrer;">Back</a>
+    {% if get_subpages(page['url'] %}
+    <h3>Pages:</h3>
+    <ol>
+      {% for subpage_url, subpage in get_subpages(page['url']).items() %}
+      <li><a href="{{subpage_url}}">{{subpage['title']}}</a></li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+  </div>
 
+  <div class="content">
+    {% if page['has_content'] %}
+    {{ include_raw(page['content_path']) }}
+    {% endif %}
+  </div>
 </main>
 {% endblock %}

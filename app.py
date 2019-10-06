@@ -1,6 +1,6 @@
 import sys
 from flask import render_template
-from staticpy import app, log, build_all
+from staticpy import app, log, build_all, BASE_CONFIG
 
 ########################
 # CUSTOM ROUTES
@@ -9,7 +9,8 @@ from staticpy import app, log, build_all
 
 @app.route("/notes")
 def notes_page():
-    return render_template("notes/index.html")
+    context = BASE_CONFIG['contexts']['notes']
+    return render_template("notes/index.html", **context)
 
 
 @app.route("/posts")

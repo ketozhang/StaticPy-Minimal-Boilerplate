@@ -1,2 +1,5 @@
 .vscode/
+templates/notes
+templates/posts
+
 Pipfile.lock
