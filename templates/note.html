@@ -2,23 +2,36 @@
 {% block content %}
 {% include 'header.html' %}
 <main class="container">
-  <h1 class="title">{{page['title']}}</h1>
-  <div class="sidenav">
-    <a href="javascript:window.location.href=document.referrer;">Back</a>
-    {% if get_subpages(page['url'] %}
-    <h3>Pages:</h3>
-    <ol>
-      {% for subpage_url, subpage in get_subpages(page['url']).items() %}
-      <li><a href="{{subpage_url}}">{{subpage['title']}}</a></li>
-      {% endfor %}
-    </ol>
-    {% endif %}
-  </div>
+  <article>
 
-  <div class="content">
+    <header>
+      <h1 class="title">{{page['title']}}</h1>
+
+      <!-- Notebook Navigation -->
+      {% set subpages=get_subpages(page['url']) %}
+      {% if subpages %}
+      <h3>Pages:</h3>
+      <ul>
+        {% set maxdepth = 2 %}
+        {% for subpage in subpages recursive %}
+
+        <li>
+          <a href="{{ subpage['url'] }}">{{subpage['title']}}</a>
+          {% if subpage['subpages'] %}
+          <ul>{{ loop(subpage['subpages']) }}</ul>
+          {% endif %}
+        </li>
+
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </header>
+
+    <!-- Content -->
     {% if page['has_content'] %}
-    {{ include_raw(page['content_path']) }}
+    <section class="content">{{ include_raw(page['content_path']) }}</section>
     {% endif %}
-  </div>
+
+  </article>
 </main>
 {% endblock %}

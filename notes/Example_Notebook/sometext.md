@@ -1,8 +1,6 @@
 ---
-title: Example Page
+title: Just Some Text
 ---
-
-<div class="text-center">![](example.png)</div>
 
 ## First Section
 

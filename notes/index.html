@@ -2,11 +2,22 @@
 {% block content %}
 {% include 'header.html' %}
 <main class="container">
-  <h3>Notebooks:</h3>
-  <ul>
-  {% for notebook_url, notebook in get_subpages(request.path).items() %}
-    <li><a href="{{notebook_url}}">{{notebook['title']}}</a></li>
-    {% endfor %}
-  </ul>
+  <header>
+    <h3>Notebooks:</h3>
+    <!-- TODO: get_subpages(page['url']) -->
+    {% set maxdepth = 2 %}
+    <ul style="list-style: none; padding-left: 0;">
+      {% for subpage in get_subpages(request.path) recursive %}
+
+      <li>
+        <a href="{{ subpage['url'] }}">{{subpage['title']}}</a>
+        {% if subpage['subpages'] %}
+        <ul>{{ loop(subpage['subpages']) }}</ul>
+        {% endif %}
+      </li>
+
+      {% endfor %}
+    </ul>
+  </header>
 </main>
 {% endblock %}

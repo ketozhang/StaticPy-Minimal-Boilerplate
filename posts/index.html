@@ -3,9 +3,18 @@
 {% include 'header.html' %}
 <main class="container">
   <h3>Blogposts:</h3>
-  <ul>
-  {% for post_url, post in get_subpages(request.path).items() %}
-    <li><a href="{{post_url}}">{{post['title']}}</a></li>
+  <!-- TODO: get_subpages(page['url']) -->
+  {% set maxdepth = 2 %}
+  <ul style="list-style: none; padding-left: 0;">
+    {% for subpage in get_subpages(request.path) recursive %}
+
+    <li>
+      <a href="{{ subpage['url'] }}">{{subpage['title']}}</a>
+      {% if subpage['subpages'] %}
+        <ul>{{ loop(subpage['subpages']) }}</ul>
+      {% endif %}
+    </li>
+
     {% endfor %}
   </ul>
 </main>

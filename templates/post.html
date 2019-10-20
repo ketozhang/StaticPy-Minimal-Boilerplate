@@ -2,28 +2,20 @@
 {% block content %}
 {% include 'header.html' %}
 <main class="container">
-  <div class="sidenav">
-    <a href="javascript:window.location.href=document.referrer;">Back</a>
-    {% if get_subpages(page['url']) %}
-    <h3>Pages:</h3>
-    <ol>
-      {% for subpage_url, subpage in get_subpages(page['url']).items() %}
-      <li><a href="{{subpage_url}}">{{subpage['title']}}</a></li>
-      {% endfor %}
-    </ol>
-    {% endif %}
-  </div>
+  <article>
 
-  <h1 class="title">{{page['title']}}</h1>
-  <p class="text-muted">Last updated: {{page['last_updated'].split('T')[0]}}</p>
-  <div style="text-align: center">
-    <img src="{{page['image']}}" style="height: 300px; width: 300px;">
-  </div>
+    <header>
+        <h1 class="title">{{page['title']}}</h1>
+        <small>Last updated: <time>{{page['last_updated'].split('T')[0]}}</time></small>
+        <div style="text-align: center">
+          <img src="{{page['image']}}" style="height: 300px; width: 300px;">
+        </div>
 
-  <div class="content">
+    <!-- Content -->
     {% if page['has_content'] %}
-    {{ include_raw(page['content_path']) }}
+    <section class="content">{{ include_raw(page['content_path']) }}</section>
     {% endif %}
-  </div>
+
+  </article>
 </main>
 {% endblock %}
