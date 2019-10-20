@@ -8,16 +8,18 @@ from staticpy import app, log, build_all, BASE_CONFIG, get_config
 @app.route("/")
 def home():
     """Renders the home page."""
-    return render_template("home.html"), **home_config)
+    return render_template("home.html")
 
 
 @app.route("/notes")
+@app.route("/notes/index.html")
 def notes_page():
     context = BASE_CONFIG["contexts"]["notes"]
     return render_template("notes/index.html", **context)
 
 
 @app.route("/posts")
+@app.route("/posts/index.html")
 def posts_page():
     return render_template("posts/index.html")
 

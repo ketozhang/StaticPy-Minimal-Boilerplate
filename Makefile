@@ -2,8 +2,7 @@ local:
 	pipenv run python app.py
 
 build:
-	pipenv run python app.py build
-
+	pipenv run python app.py build;
 
 .PHONY: static
 static:
@@ -13,9 +12,10 @@ freeze:
 	make static
 
 clean:
-	rm -rf docs/ && \
-	rm -rf templates/*.bak && \
-	rm -rf templates/notes/ && \
+	rm -rf docs/ ; \
+	rm -rf docs.bak/ ; \
+	rm -rf templates/*.bak ; \
+	rm -rf templates/notes/ ; \
 	rm -rf templates/posts/
 
 push:
