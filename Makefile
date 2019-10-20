@@ -27,9 +27,7 @@ publish:
 	rm -rf docs
 
 push:
-	make static
-	pipenv lock -r  > requirements.txt
-	git add -A
-	git commit
-	git push origin master
+	git add demo &&\
+	git commit -m "build demo" &&\
+	git subtree push --prefix demo origin gh-pages
 

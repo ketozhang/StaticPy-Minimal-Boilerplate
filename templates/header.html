@@ -3,7 +3,7 @@
     <a href="{{site_url}}" id="home">Home</a>
 
     {% for nav in navbar %}
-    <a href="{{nav['url']}}">{{nav['text']}}</a>
+    <a href="{{parse_url(nav['url'])}}">{{nav['text']}}</a>
     {% endfor %}
 
   </nav>

@@ -6,10 +6,10 @@
   <!-- TODO: get_subpages(page['url']) -->
   {% set maxdepth = 2 %}
   <ul style="list-style: none; padding-left: 0;">
-    {% for subpage in get_subpages(request.path) recursive %}
+    {% for subpage in get_subpages("/posts") recursive %}
 
     <li>
-      <a href="{{ subpage['url'] }}">{{subpage['title']}}</a>
+      <a href="{{ parse_url(subpage['url']) }}">{{subpage['title']}}</a>
       {% if subpage['subpages'] %}
         <ul>{{ loop(subpage['subpages']) }}</ul>
       {% endif %}
