@@ -8,8 +8,7 @@ from staticpy import app, log, build_all, BASE_CONFIG, get_config
 @app.route("/")
 def home():
     """Renders the home page."""
-    home_config = BASE_CONFIG["home"]
-    return render_template(home_config.get("template", "home.html"), **home_config)
+    return render_template("home.html"), **home_config)
 
 
 @app.route("/notes")
