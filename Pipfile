@@ -8,6 +8,7 @@ rope = "*"
 gunicorn = "*"
 
 [packages]
+staticpy = {editable = true,path = "./../staticpy"}
 
 [requires]
 python_version = "3.7"

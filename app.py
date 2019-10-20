@@ -1,15 +1,20 @@
 import sys
 from flask import render_template
-from staticpy import app, log, build_all, BASE_CONFIG
+from staticpy import app, log, build_all, BASE_CONFIG, get_config
 
 ########################
 # CUSTOM ROUTES
 ########################
+@app.route("/")
+def home():
+    """Renders the home page."""
+    home_config = BASE_CONFIG["home"]
+    return render_template(home_config.get("template", "home.html"), **home_config)
 
 
 @app.route("/notes")
 def notes_page():
-    context = BASE_CONFIG['contexts']['notes']
+    context = BASE_CONFIG["contexts"]["notes"]
     return render_template("notes/index.html", **context)
 
 
@@ -20,11 +25,10 @@ def posts_page():
 
 if __name__ == "__main__":
     args = sys.argv[1:]
+    log.setLevel("INFO")
     if len(args) == 0:
-        log.setLevel("INFO")
-        app.run(debug=True, port=8080, local=True)
-    elif "build" in args:
-        log.setLevel("INFO")
+        app.run(debug=True, port=8081, local=True)
+    if "build" in args:
         elapsed_time = build_all()
         print(f"Building templates finished in {elapsed_time:.2f}secs")
     else:
