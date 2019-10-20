@@ -16,7 +16,15 @@ clean:
 	rm -rf docs.bak/ ; \
 	rm -rf templates/*.bak ; \
 	rm -rf templates/notes/ ; \
-	rm -rf templates/posts/
+	rm -rf templates/posts/; \
+
+
+publish:
+	make static && \
+	find demo/ -mindepth 1 \
+		! \( -name ".*" -o -name "_*" \) -exec rm -r {} \; ;\
+	rsync -a docs/ demo/ &&\
+	rm -rf docs
 
 push:
 	make static

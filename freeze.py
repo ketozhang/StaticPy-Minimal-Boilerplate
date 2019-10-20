@@ -130,6 +130,8 @@ if __name__ == "__main__":
     if "debug" in args:
         app.debug = True
         logging.basicConfig(level=logging.DEBUG)
+    else:
+        app.debug = False
     if "skip_build" in args:
         kwargs["skip_build"] = True
     elapsed_times = freeze(**kwargs)
